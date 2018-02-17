@@ -90,6 +90,29 @@ function navigatorPush(navigator, params) {
   return newPlatformSpecific.push(adapted);
 }
 
+function navigatorReplace(navigator, params) {
+  addNavigatorParams(params, navigator);
+  addNavigatorButtons(params);
+  addTitleBarBackButtonIfNeeded(params);
+  addNavigationStyleParams(params);
+
+  adaptTopTabs(params, params.navigatorID);
+
+  params.screenId = params.screen;
+  let adapted = adaptNavigationStyleToScreenStyle(params);
+  adapted = adaptNavigationParams(adapted);
+  adapted.overrideBackPress = params.overrideBackPress;
+  adapted.timestamp = Date.now();
+  if (!adapted.passProps) {
+    adapted.passProps = {};
+  }
+  if (!adapted.passProps.commandType) {
+    adapted.passProps.commandType = 'Replace';
+  }
+
+  return newPlatformSpecific.replace(adapted);
+}
+
 function navigatorPop(navigator, params) {
   addNavigatorParams(params, navigator);
 
@@ -788,6 +811,7 @@ export default {
   startTabBasedApp,
   startSingleScreenApp,
   navigatorPush,
+  navigatorReplace,
   navigatorPop,
   navigatorPopToRoot,
   navigatorResetTo,

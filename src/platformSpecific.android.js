@@ -15,6 +15,11 @@ function push(screenParams) {
   return NativeReactModule.push(screenParams);
 }
 
+function replace(screenParams) {
+  savePassProps(screenParams);
+  return NativeReactModule.replace(screenParams);
+}
+
 function pop(screenParams) {
   NativeReactModule.pop(screenParams);
 }
@@ -196,6 +201,7 @@ async function getLaunchArgs() {
 module.exports = {
   startApp,
   push,
+  replace,
   pop,
   popToRoot,
   newStack,

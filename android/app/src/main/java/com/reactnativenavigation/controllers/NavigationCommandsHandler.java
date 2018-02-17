@@ -46,6 +46,11 @@ public class NavigationCommandsHandler {
         });
     }
 
+    public static void replace(Bundle screenParams, final Promise onReplaceComplete) {
+        pop(screenParams);
+        push(screenParams, onReplaceComplete);
+    }
+
     public static void pop(Bundle screenParams) {
         final NavigationActivity currentActivity = NavigationActivity.currentActivity;
         if (currentActivity == null) {
